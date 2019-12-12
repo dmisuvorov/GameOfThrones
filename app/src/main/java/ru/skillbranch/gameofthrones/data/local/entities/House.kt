@@ -3,13 +3,11 @@ package ru.skillbranch.gameofthrones.data.local.entities
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "houses")
 data class House(
-    val id: String,
-
     @PrimaryKey
+    val id: String,
     val name: String,
-
     val region: String,
     val coatOfArms: String,
     val words: String,

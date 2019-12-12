@@ -15,8 +15,8 @@ interface HouseApi {
     fun getHousesByPage(@Query("page") page: Int = 1, @Query("pageSize") pageSize: Int = 50): Observable<Response<List<HouseRes>>>
 
     @GET("houses")
-    fun getHouseByName(@Query("name") name: String): Single<List<HouseRes>>
+    fun getHousesByName(@Query("name") name: String): Observable<List<HouseRes>>
 
     @GET("characters/{id}")
-    fun getCharacterById(@Path("id") id: String): Single<CharacterRes>
+    fun getCharacterById(@Path("id") id: String): Observable<CharacterRes>
 }

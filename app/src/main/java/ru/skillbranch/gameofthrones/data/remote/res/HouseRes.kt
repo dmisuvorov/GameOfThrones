@@ -1,5 +1,7 @@
 package ru.skillbranch.gameofthrones.data.remote.res
 
+import ru.skillbranch.gameofthrones.util.dropLastUntil
+
 data class HouseRes(
     val url: String,
     val name: String,
@@ -18,3 +20,7 @@ data class HouseRes(
     val cadetBranches: List<Any> = listOf(),
     val swornMembers: List<String> = listOf()
 )
+
+fun HouseRes.shortName(): String {
+    return name.split(" ").dropLastUntil { it == "of" }.last()
+}

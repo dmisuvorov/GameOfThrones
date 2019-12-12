@@ -14,7 +14,7 @@ class SplashViewModel @Inject constructor() : ViewModel() {
     }
 
     fun getHouses() {
-       RootRepository.getAllHouses { houses -> state.value = SplashState.SUCCESS }
+
     }
 
     sealed class SplashState {

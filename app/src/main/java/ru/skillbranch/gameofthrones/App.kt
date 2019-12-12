@@ -9,8 +9,14 @@ import ru.skillbranch.gameofthrones.di.modules.AndroidModule
 import ru.skillbranch.gameofthrones.di.modules.SplashModule
 
 class App : Application() {
-    val component: ApplicationComponent by lazy {
-        DaggerApplicationComponent
+
+    override fun onCreate() {
+        super.onCreate()
+        createComponent()
+    }
+
+    private fun createComponent() {
+        component = DaggerApplicationComponent
             .builder()
             .androidModule(AndroidModule(this))
             .build()
@@ -28,7 +34,19 @@ class App : Application() {
     }
 
 
+
     companion object {
+        lateinit var component: ApplicationComponent
+
+        var splashSubComponent: SplashSubComponent? = null
+            get() {
+                field ?: return component.plus(SplashModule())
+                return field
+            }
+
+        fun releaseSplashSubComponent() {
+            splashSubComponent = null
+        }
         fun get(context: Context): App = context.applicationContext as App
     }
 

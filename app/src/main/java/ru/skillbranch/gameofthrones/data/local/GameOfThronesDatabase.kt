@@ -5,12 +5,17 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import ru.skillbranch.gameofthrones.data.local.entities.Character
 import ru.skillbranch.gameofthrones.data.local.entities.CharacterFull
 import ru.skillbranch.gameofthrones.data.local.entities.CharacterItem
 import ru.skillbranch.gameofthrones.data.local.entities.House
 import ru.skillbranch.gameofthrones.data.local.entities.RelativeCharacter
 
-@Database(entities = [CharacterItem::class, CharacterFull::class, RelativeCharacter::class, House::class], version = 1, exportSchema = false)
+@Database(
+    entities = [Character::class, House::class],
+    version = 1,
+    exportSchema = false
+)
 @TypeConverters(Converters::class)
 abstract class GameOfThronesDatabase : RoomDatabase() {
     abstract fun characterDao(): CharacterDao
