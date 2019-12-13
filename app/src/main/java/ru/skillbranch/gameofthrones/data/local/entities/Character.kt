@@ -1,11 +1,11 @@
 package ru.skillbranch.gameofthrones.data.local.entities
 
-import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-
+@Entity(tableName = "characters")
 data class Character(
+    @PrimaryKey
     val id: String,
     val name: String,
     val gender: String,
@@ -20,9 +20,7 @@ data class Character(
     val houseId: String//rel
 )
 
-@Entity(tableName = "character_item")
 data class CharacterItem(
-    @PrimaryKey
     val id: String,
     val house: String, //rel
     val name: String,
@@ -30,9 +28,7 @@ data class CharacterItem(
     val aliases: List<String>
 )
 
-@Entity(tableName = "character_full")
 data class CharacterFull(
-    @PrimaryKey
     val id: String,
     val name: String,
     val words: String,
@@ -40,17 +36,21 @@ data class CharacterFull(
     val died: String,
     val titles: List<String>,
     val aliases: List<String>,
-    val house:String, //rel
-    @Embedded(prefix = "father")
+    val house: String, //rel
     val father: RelativeCharacter?,
-    @Embedded(prefix = "mather")
     val mother: RelativeCharacter?
 )
 
-@Entity
 data class RelativeCharacter(
-    @PrimaryKey
     val id: String,
-    val name: String,
-    val house:String //rel
+    val name: String = "",
+    val house: String = "" //rel
 )
+
+fun CharacterFull.newInstance(
+    id: String = this.id, name: String = this.name, words: String = this.words,
+    born: String = this.born, died: String = this.died, titles: List<String> = this.titles,
+    aliases: List<String> = this.aliases, house: String = this.house,
+    father: RelativeCharacter? = this.father, mother: RelativeCharacter? = this.mother
+): CharacterFull =
+    CharacterFull(id, name, words, born, died, titles, aliases, house, father, mother)

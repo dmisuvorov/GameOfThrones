@@ -13,9 +13,16 @@ class DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideCharacterDao(context: Context) : CharacterDao = GameOfThronesDatabase.getInstance(context).characterDao()
+    fun provideDatabase(context: Context): GameOfThronesDatabase =
+        GameOfThronesDatabase.getInstance(context)
 
     @Provides
     @Singleton
-    fun provideHouseDao(context: Context) : HouseDao = GameOfThronesDatabase.getInstance(context).houseDao()
+    fun provideCharacterDao(gameOfThronesDatabase: GameOfThronesDatabase): CharacterDao =
+        gameOfThronesDatabase.characterDao()
+
+    @Provides
+    @Singleton
+    fun provideHouseDao(gameOfThronesDatabase: GameOfThronesDatabase): HouseDao =
+        gameOfThronesDatabase.houseDao()
 }

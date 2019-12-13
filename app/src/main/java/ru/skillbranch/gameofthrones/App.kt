@@ -9,6 +9,7 @@ import ru.skillbranch.gameofthrones.di.modules.AndroidModule
 import ru.skillbranch.gameofthrones.di.modules.SplashModule
 
 class App : Application() {
+
     override fun onCreate() {
         super.onCreate()
         createComponent()
@@ -21,6 +22,8 @@ class App : Application() {
             .build()
     }
 
+
+
     companion object {
         lateinit var component: ApplicationComponent
 
@@ -29,6 +32,7 @@ class App : Application() {
                 field ?: return component.plus(SplashModule())
                 return field
             }
+
 
         fun releaseSplashSubComponent() {
             splashSubComponent = null

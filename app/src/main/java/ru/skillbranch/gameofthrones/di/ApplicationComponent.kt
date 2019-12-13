@@ -13,7 +13,7 @@ import javax.inject.Singleton
 interface ApplicationComponent {
     fun inject(splashScreen: SplashScreen)
 
-    fun inject(rootRepository: RootRepository)
-
     fun plus(splashModule: SplashModule): SplashSubComponent
+
+    fun inject(rootRepository: RootRepository)
 }

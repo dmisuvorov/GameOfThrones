@@ -17,7 +17,9 @@ class SplashScreen : AppCompatActivity(), SplashView {
     @Inject
     lateinit var splashViewModelFactory: SplashViewModelFactory
 
-    private val splashViewModel by lazy { splashViewModelFactory.create(SplashViewModel::class.java) }
+    @Inject
+    lateinit var splashViewModel: SplashViewModel
+
 
     private val splashImg by lazy { findViewById<ImageView>(R.id.iv_splash) }
     override fun onCreate(savedInstanceState: Bundle?) {
