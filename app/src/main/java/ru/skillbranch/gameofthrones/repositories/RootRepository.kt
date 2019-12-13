@@ -16,6 +16,7 @@ import ru.skillbranch.gameofthrones.data.local.GameOfThronesDatabase
 import ru.skillbranch.gameofthrones.data.local.HouseDao
 import ru.skillbranch.gameofthrones.data.local.entities.CharacterFull
 import ru.skillbranch.gameofthrones.data.local.entities.CharacterItem
+import ru.skillbranch.gameofthrones.data.local.entities.newInstance
 import ru.skillbranch.gameofthrones.data.remote.HouseApi
 import ru.skillbranch.gameofthrones.data.remote.res.CharacterRes
 import ru.skillbranch.gameofthrones.data.remote.res.HouseRes
@@ -159,7 +160,7 @@ object RootRepository {
 
     /**
      * Запись данных о пересонажах в DB
-     * @param Characters - Список персонажей (модель CharacterRes - модель ответа из сети)
+     * @param characters - Список персонажей (модель CharacterRes - модель ответа из сети)
      * необходимо произвести трансформацию данных
      * @param complete - колбек о завершении вставки записей db
      */
@@ -199,9 +200,15 @@ object RootRepository {
      * @param name - краткое имя дома (его первычный ключ)
      * @param result - колбек содержащий в себе список краткой информации о персонажах дома
      */
+    @SuppressLint("CheckResult")
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun findCharactersByHouseName(name: String, result: (Characters: List<CharacterItem>) -> Unit) {
-        //TODO implement me
+        characterDao!!.findCharactersByHouseName(name)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { characters -> result(characters) },
+                { error -> error.printStackTrace() })
     }
 
     /**
@@ -210,9 +217,33 @@ object RootRepository {
      * @param id - идентификатор персонажа
      * @param result - колбек содержащий в себе полную информацию о персонаже
      */
+    @SuppressLint("CheckResult")
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun findCharacterFullById(id: String, result: (Character: CharacterFull) -> Unit) {
-        //TODO implement me
+        characterDao!!.findCharacterFullById(id)
+            .flatMap { characterFull ->
+                Single.just(characterFull)
+                    .filter { characterFull.father?.id?.isNotEmpty() ?: false }
+                    .flatMap { characterDao?.findRelativeCharacterById(characterFull.father!!.id) }
+                    .toSingle()
+                    .flatMap { fatherRelative ->
+                        Single.just(characterFull.newInstance(father = fatherRelative))
+                    }
+            }
+            .flatMap { characterFull ->
+                Single.just(characterFull)
+                    .filter { characterFull.mother?.id?.isNotEmpty() ?: false }
+                    .flatMap { characterDao?.findRelativeCharacterById(characterFull.mother!!.id) }
+                    .toSingle()
+                    .flatMap { motherRelative ->
+                        Single.just(characterFull.newInstance(mother = motherRelative))
+                    }
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { characters -> result(characters) },
+                { error -> error.printStackTrace() })
     }
 
     /**

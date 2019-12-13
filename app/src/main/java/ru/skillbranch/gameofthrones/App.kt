@@ -22,17 +22,6 @@ class App : Application() {
             .build()
     }
 
-    var splashSubComponent: SplashSubComponent? = null
-        get() {
-            field ?: return component.plus(SplashModule())
-            return field
-        }
-
-
-    fun releaseSplashSubComponent() {
-        splashSubComponent = null
-    }
-
 
 
     companion object {
@@ -44,9 +33,11 @@ class App : Application() {
                 return field
             }
 
+
         fun releaseSplashSubComponent() {
             splashSubComponent = null
         }
+
         fun get(context: Context): App = context.applicationContext as App
     }
 

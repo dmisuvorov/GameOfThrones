@@ -20,13 +20,12 @@ class SplashScreen : AppCompatActivity(), SplashView {
     @Inject
     lateinit var splashViewModel: SplashViewModel
 
-    private val app by lazy { App.get(this) }
 
     private val splashImg by lazy { findViewById<ImageView>(R.id.iv_splash) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        injectDependencies(app)
+        injectDependencies()
         initViewModels()
         loadAnimations()
     }
@@ -47,15 +46,15 @@ class SplashScreen : AppCompatActivity(), SplashView {
 
     override fun onDestroy() {
         super.onDestroy()
-        releaseSubComponent(app)
+        releaseSubComponent()
     }
 
-    private fun releaseSubComponent(app: App) {
-        app.releaseSplashSubComponent()
+    private fun releaseSubComponent() {
+        App.releaseSplashSubComponent()
     }
 
-    private fun injectDependencies(app: App) {
-        app.splashSubComponent?.inject(this)
+    private fun injectDependencies() {
+        App.splashSubComponent?.inject(this)
     }
 
     private fun loadAnimations() {
