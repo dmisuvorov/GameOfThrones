@@ -12,13 +12,13 @@ import ru.skillbranch.gameofthrones.data.local.entities.RelativeCharacter
 interface CharacterDao {
 
     @Query("SELECT id, houseId as house, name, titles, aliases FROM characters WHERE houseId = :name")
-    fun findCharactersByHouseName(name: String): Single<List<CharacterItem>>
+    fun findCharactersByHouseName(name: String): Maybe<List<CharacterItem>>
 
     @Query("SELECT characters.id id, characters.name name, houses.words words, characters.born born, " +
             "characters.died died, characters.titles titles, characters.aliases aliases, characters.houseId house, " +
             "characters.father father, characters.mother mother " +
             "FROM characters, houses WHERE characters.id = :id")
-    fun findCharacterFullById(id: String): Single<CharacterFull>
+    fun findCharacterFullById(id: String): Maybe<CharacterFull>
 
     @Query("SELECT id, name, houseId as house FROM characters WHERE id = :id")
     fun findRelativeCharacterById(id: String): Maybe<RelativeCharacter>

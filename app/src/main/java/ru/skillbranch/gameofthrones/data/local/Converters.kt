@@ -6,7 +6,7 @@ import ru.skillbranch.gameofthrones.data.local.entities.RelativeCharacter
 class Converters {
 
     @TypeConverter
-    fun listToString(list: List<String>): String = list.joinToString { ", " }
+    fun listToString(list: List<String>): String = list.joinToString ( ", ")
 
     @TypeConverter
     fun stringToListOfString(str: String): List<String> = str.split(", ")

@@ -264,7 +264,7 @@ class ExampleInstrumentedTest {
 
         val lock2 = Object()
         var actualCharacter: CharacterFull? = null
-        RootRepository.findCharacterFullById("583") {
+        RootRepository.findCharacterFullById("1650") {
             actualCharacter = it
             synchronized(lock2) { lock2.notify() }
         }
@@ -295,7 +295,7 @@ class ExampleInstrumentedTest {
             acc.also { it.addAll(houses.swornMembers) }
         }
 
-        assertEquals(1777, actualCharacters?.size)
+        assertEquals(1567, actualCharacters?.size)
     }
 
     @Test

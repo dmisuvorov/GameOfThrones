@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.net.Uri
 import androidx.annotation.VisibleForTesting
 import io.reactivex.Completable
+import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -222,28 +223,36 @@ object RootRepository {
     fun findCharacterFullById(id: String, result: (Character: CharacterFull) -> Unit) {
         characterDao!!.findCharacterFullById(id)
             .flatMap { characterFull ->
-                Single.just(characterFull)
-                    .filter { characterFull.father?.id?.isNotEmpty() ?: false }
-                    .flatMap { characterDao?.findRelativeCharacterById(characterFull.father!!.id) }
-                    .toSingle()
-                    .flatMap { fatherRelative ->
-                        Single.just(characterFull.newInstance(father = fatherRelative))
+                Maybe.just(characterFull)
+                    .flatMap {
+                        characterFull.father?.id ?: Maybe.just(characterFull)
+                        if (characterFull.father!!.id.isNotEmpty())
+                            characterDao?.findRelativeCharacterById(characterFull.father.id)!!
+                                .flatMap { fatherRelative ->
+                                    Maybe.just(characterFull.newInstance(father = fatherRelative))
+                                }
+                        else Maybe.just(characterFull)
                     }
+
             }
             .flatMap { characterFull ->
-                Single.just(characterFull)
-                    .filter { characterFull.mother?.id?.isNotEmpty() ?: false }
-                    .flatMap { characterDao?.findRelativeCharacterById(characterFull.mother!!.id) }
-                    .toSingle()
-                    .flatMap { motherRelative ->
-                        Single.just(characterFull.newInstance(mother = motherRelative))
+                Maybe.just(characterFull)
+                    .flatMap {
+                        characterFull.mother?.id ?: Maybe.just(characterFull)
+                        if (characterFull.mother!!.id.isNotEmpty())
+                            characterDao?.findRelativeCharacterById(characterFull.mother.id)!!
+                                .flatMap { motherRelative ->
+                                    Maybe.just(characterFull.newInstance(mother = motherRelative))
+                                }
+                        else Maybe.just(characterFull)
                     }
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { characters -> result(characters) },
-                { error -> error.printStackTrace() })
+                { error -> error.printStackTrace() },
+                { throw IllegalArgumentException("No such character") })
     }
 
     /**
