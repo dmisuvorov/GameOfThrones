@@ -10,5 +10,6 @@ class ClientModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient = OkHttpClient().newBuilder().build()
+    fun provideOkHttpClient(): OkHttpClient =
+        OkHttpClient().newBuilder().build()
 }

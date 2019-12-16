@@ -6,10 +6,12 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import ru.skillbranch.gameofthrones.App
 import ru.skillbranch.gameofthrones.R
 import ru.skillbranch.gameofthrones.presentation.splash.SplashViewModel
 import ru.skillbranch.gameofthrones.presentation.splash.SplashViewModelFactory
+import ru.skillbranch.gameofthrones.util.isConnected
 import javax.inject.Inject
 
 
@@ -33,7 +35,7 @@ class SplashScreen : AppCompatActivity(), SplashView {
     private fun initViewModels() {
         splashViewModel.state.observe(this, Observer { state ->
             when (state) {
-                is SplashViewModel.SplashState.LOADING -> splashViewModel.getHouses()
+                is SplashViewModel.SplashState.LOADING -> splashViewModel.getHouses(isConnected())
                 is SplashViewModel.SplashState.ERROR -> showErrorMessage(state.errorMessage)
                 is SplashViewModel.SplashState.SUCCESS -> navigateToCharacterList()
             }
@@ -63,6 +65,7 @@ class SplashScreen : AppCompatActivity(), SplashView {
     }
 
     override fun showErrorMessage(message: Int) {
-
+        Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_INDEFINITE)
+            .show()
     }
 }

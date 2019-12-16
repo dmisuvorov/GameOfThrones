@@ -167,7 +167,7 @@ object RootRepository {
      */
     @SuppressLint("CheckResult")
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    fun insertCharacters(characters: List<CharacterRes>, complete: () -> Unit) {
+    fun insertCharacters(characters: List<CharacterRes>, complete: () -> Unit = {}) {
         Completable.fromAction {
             characterDao?.insertCharacters(characters.map { it.toCharacter() })
         }
@@ -225,7 +225,7 @@ object RootRepository {
             .flatMap { characterFull ->
                 Maybe.just(characterFull)
                     .flatMap {
-                        characterFull.father?.id ?: Maybe.just(characterFull)
+                        characterFull.father ?: Maybe.just(characterFull)
                         if (characterFull.father!!.id.isNotEmpty())
                             characterDao?.findRelativeCharacterById(characterFull.father.id)!!
                                 .flatMap { fatherRelative ->
@@ -238,7 +238,7 @@ object RootRepository {
             .flatMap { characterFull ->
                 Maybe.just(characterFull)
                     .flatMap {
-                        characterFull.mother?.id ?: Maybe.just(characterFull)
+                        characterFull.mother ?: Maybe.just(characterFull)
                         if (characterFull.mother!!.id.isNotEmpty())
                             characterDao?.findRelativeCharacterById(characterFull.mother.id)!!
                                 .flatMap { motherRelative ->
