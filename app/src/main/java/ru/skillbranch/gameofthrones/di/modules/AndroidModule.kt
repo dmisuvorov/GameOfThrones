@@ -1,6 +1,7 @@
 package ru.skillbranch.gameofthrones.di.modules
 
 import android.content.Context
+import android.content.res.Resources
 import dagger.Module
 import dagger.Provides
 import ru.skillbranch.gameofthrones.App
@@ -12,6 +13,4 @@ class AndroidModule(private val application: App) {
     @Provides
     @Singleton
     fun provideContext(): Context = application.applicationContext
-
-
 }

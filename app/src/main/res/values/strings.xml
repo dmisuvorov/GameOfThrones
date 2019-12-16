@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Game of Thrones</string>
+    <string name="message_no_internet">Интернет недоступен - приложение не может быть запущенно. Подключитесь к интернету и перезапустите приложение</string>
+
+    <string name="stark_title">Stark</string>
+    <string name="lannister_title">Lannister</string>
+    <string name="targaryen_title">Targaryen</string>
+    <string name="baratheon_title">Baratheon</string>
+    <string name="greyjoy_title">Greyjoy</string>
+    <string name="martel_title">Martel</string>
+    <string name="tyrell_title">Tyrell</string>
 </resources>

@@ -3,6 +3,7 @@ package ru.skillbranch.gameofthrones.di
 import dagger.Component
 import ru.skillbranch.gameofthrones.di.modules.*
 import ru.skillbranch.gameofthrones.repositories.RootRepository
+import ru.skillbranch.gameofthrones.ui.list.CharacterListScreen
 import ru.skillbranch.gameofthrones.ui.splash.SplashScreen
 import javax.inject.Singleton
 
@@ -11,9 +12,11 @@ import javax.inject.Singleton
     modules = [AndroidModule::class, NetworkModule::class, ClientModule::class, DatabaseModule::class]
 )
 interface ApplicationComponent {
-    fun inject(splashScreen: SplashScreen)
+    fun inject(rootRepository: RootRepository)
+
+    fun inject(characterListScreen: CharacterListScreen)
 
     fun plus(splashModule: SplashModule): SplashSubComponent
 
-    fun inject(rootRepository: RootRepository)
+    fun plus(listModule: ListModule): ListSubComponent
 }

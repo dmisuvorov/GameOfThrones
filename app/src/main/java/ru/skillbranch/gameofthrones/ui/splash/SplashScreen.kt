@@ -10,15 +10,11 @@ import com.google.android.material.snackbar.Snackbar
 import ru.skillbranch.gameofthrones.App
 import ru.skillbranch.gameofthrones.R
 import ru.skillbranch.gameofthrones.presentation.splash.SplashViewModel
-import ru.skillbranch.gameofthrones.presentation.splash.SplashViewModelFactory
 import ru.skillbranch.gameofthrones.util.isConnected
 import javax.inject.Inject
 
 
 class SplashScreen : AppCompatActivity(), SplashView {
-    @Inject
-    lateinit var splashViewModelFactory: SplashViewModelFactory
-
     @Inject
     lateinit var splashViewModel: SplashViewModel
 

@@ -7,7 +7,6 @@ import ru.skillbranch.gameofthrones.presentation.splash.SplashViewModel
 import ru.skillbranch.gameofthrones.presentation.splash.SplashViewModelFactory
 
 @Module
-
 class SplashModule {
     @Provides
     @SplashScope
