@@ -264,7 +264,7 @@ class ExampleInstrumentedTest {
 
         val lock2 = Object()
         var actualCharacter: CharacterFull? = null
-        RootRepository.findCharacterFullById("1650") {
+        RootRepository.findCharacterFullById("583") {
             actualCharacter = it
             synchronized(lock2) { lock2.notify() }
         }

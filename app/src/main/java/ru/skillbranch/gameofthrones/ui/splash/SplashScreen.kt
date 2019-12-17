@@ -1,5 +1,6 @@
 package ru.skillbranch.gameofthrones.ui.splash
 
+import android.content.Context
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 
@@ -10,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import ru.skillbranch.gameofthrones.App
 import ru.skillbranch.gameofthrones.R
 import ru.skillbranch.gameofthrones.presentation.splash.SplashViewModel
+import ru.skillbranch.gameofthrones.ui.list.CharacterListScreen
 import ru.skillbranch.gameofthrones.util.isConnected
 import javax.inject.Inject
 
@@ -17,6 +19,9 @@ import javax.inject.Inject
 class SplashScreen : AppCompatActivity(), SplashView {
     @Inject
     lateinit var splashViewModel: SplashViewModel
+
+    @Inject
+    lateinit var context: Context
 
 
     private val splashImg by lazy { findViewById<ImageView>(R.id.iv_splash) }
@@ -31,15 +36,19 @@ class SplashScreen : AppCompatActivity(), SplashView {
     private fun initViewModels() {
         splashViewModel.state.observe(this, Observer { state ->
             when (state) {
-                is SplashViewModel.SplashState.LOADING -> splashViewModel.getHouses(isConnected())
+                is SplashViewModel.SplashState.LOADING -> onStartLoading()
                 is SplashViewModel.SplashState.ERROR -> showErrorMessage(state.errorMessage)
                 is SplashViewModel.SplashState.SUCCESS -> navigateToCharacterList()
             }
         })
     }
 
+    private fun onStartLoading() {
+        splashViewModel.getHouses(isConnected())
+    }
+
     override fun navigateToCharacterList() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        startActivity(CharacterListScreen.newIntent(context))
     }
 
     override fun onDestroy() {

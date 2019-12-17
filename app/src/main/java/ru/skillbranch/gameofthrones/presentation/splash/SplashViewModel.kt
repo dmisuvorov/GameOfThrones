@@ -22,19 +22,20 @@ class SplashViewModel @Inject constructor() : ViewModel() {
             if (isNeed) {
                 if (isConnected) {
                     RootRepository.getNeedHouseWithCharacters(*AppConfig.NEED_HOUSES) { needHousesWithCharacters ->
-                        val lock = Object()
                         needHousesWithCharacters.map { it.first }
-                            .also { RootRepository.insertHouses(it) { synchronized(lock) { lock.notify() } } }
-                        synchronized(lock) { lock.wait() }
-
-                        needHousesWithCharacters.map { it.second }.flatten()
-                            .also { RootRepository.insertCharacters(it) { onDataSyncWithDatabase() } }
+                            .also { houses ->
+                                RootRepository.insertHouses(houses) {
+                                    needHousesWithCharacters.map { it.second }.flatten()
+                                        .also { RootRepository.insertCharacters(it) { onDataSyncWithDatabase() } }
+                                }
+                            }
                     }
                 } else {
                     onNotInternetConnected()
                 }
+            } else {
+                onDataSyncWithDatabase()
             }
-            onDataSyncWithDatabase()
         }
     }
 

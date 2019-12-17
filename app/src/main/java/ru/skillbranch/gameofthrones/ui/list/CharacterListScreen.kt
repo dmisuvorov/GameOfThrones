@@ -1,6 +1,7 @@
 package ru.skillbranch.gameofthrones.ui.list
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayoutMediator
@@ -21,6 +22,11 @@ class CharacterListScreen : AppCompatActivity() {
         initViewPager()
 
         setSupportActionBar(toolbar)
+        supportActionBar?.let {
+            it.setDisplayHomeAsUpEnabled(true)
+            it.setDisplayShowHomeEnabled(true)
+        }
+
     }
 
     override fun onDestroy() {
@@ -46,6 +52,10 @@ class CharacterListScreen : AppCompatActivity() {
 
     private fun releaseSubComponent() {
         App.releaseSplashSubComponent()
+    }
+
+    companion object {
+        fun newIntent(context: Context) = Intent(context, CharacterListScreen::class.java)
     }
 
 }

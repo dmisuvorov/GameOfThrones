@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.list_item_character.view.*
 import ru.skillbranch.gameofthrones.R
 import ru.skillbranch.gameofthrones.data.local.entities.CharacterItem
 import ru.skillbranch.gameofthrones.ui.list.getDrawableHouseIcon
@@ -41,9 +42,11 @@ class CharacterListAdapter(val listener: (CharacterItem) -> Unit) :
             get() = itemView
 
         fun bind(item: CharacterItem, listener: (CharacterItem) -> Unit) {
-//            Glide.with(itemView)
-//                .load(getDrawableHouseIcon(item.house))
-//                .into()
+            Glide.with(itemView)
+                .load(getDrawableHouseIcon(item.house))
+                .into(itemView.iv_house)
+            itemView.tv_character_name.text = item.name
+            itemView.tv_character_titles.text = item.titles.joinToString { " • " }
         }
 
     }
