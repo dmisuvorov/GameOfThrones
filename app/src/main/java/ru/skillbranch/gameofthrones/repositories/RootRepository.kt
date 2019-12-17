@@ -135,7 +135,7 @@ object RootRepository {
             .map { characterRes -> characterRes.apply { houseId = houseRes.shortName() } }
             .toList()
             .toObservable()
-            .flatMap { swornMembers -> Observable.just(houseRes to swornMembers) }
+            .flatMap { characterRes -> Observable.just(houseRes to characterRes) }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 

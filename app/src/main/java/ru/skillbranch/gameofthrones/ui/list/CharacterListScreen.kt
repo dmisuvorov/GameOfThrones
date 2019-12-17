@@ -20,13 +20,6 @@ class CharacterListScreen : AppCompatActivity() {
         setContentView(R.layout.activity_character_list)
         injectDependencies()
         initViewPager()
-
-        setSupportActionBar(toolbar)
-        supportActionBar?.let {
-            it.setDisplayHomeAsUpEnabled(true)
-            it.setDisplayShowHomeEnabled(true)
-        }
-
     }
 
     override fun onDestroy() {

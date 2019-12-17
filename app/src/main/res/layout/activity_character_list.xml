@@ -17,26 +17,28 @@
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="6dp"
+            android:minHeight="?attr/actionBarSize">
+
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize">
+                android:layout_height="?attr/actionBarSize"
+                android:gravity="center_vertical"
+                android:text="@string/app_name"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline5.GameOfThrones"
+                android:textColor="@android:color/white" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:gravity="start"
-                    android:text="@string/app_name"
-                    android:textColor="@android:color/white"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Headline5.GameOfThrones" />
-
-            </androidx.appcompat.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:tabMode="scrollable"/>
+            app:tabMode="scrollable" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

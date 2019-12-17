@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Game of Thrones</string>
     <string name="message_no_internet">Интернет недоступен - приложение не может быть запущенно. Подключитесь к интернету и перезапустите приложение</string>
+    <string name="hint_search">Search character</string>
 
     <string name="stark_title">Stark</string>
     <string name="lannister_title">Lannister</string>

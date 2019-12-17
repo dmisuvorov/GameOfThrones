@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="item_side_margin">12dp</dimen>
+
+    <dimen name="toolbar_horizontal_padding">4dp</dimen>
+    <dimen name="first_key_line">24dp</dimen>
+    <dimen name="second_key_line">80dp</dimen>
 </resources>
