@@ -1,13 +1,13 @@
 package ru.skillbranch.gameofthrones.presentation.splash
 
 import android.annotation.SuppressLint
+import android.os.Handler
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.skillbranch.gameofthrones.AppConfig
 import ru.skillbranch.gameofthrones.R
 import ru.skillbranch.gameofthrones.repositories.RootRepository
 import javax.inject.Inject
-
 
 class SplashViewModel @Inject constructor() : ViewModel() {
     val state: MutableLiveData<SplashState> = MutableLiveData()
@@ -34,7 +34,7 @@ class SplashViewModel @Inject constructor() : ViewModel() {
                     onNotInternetConnected()
                 }
             } else {
-                onDataSyncWithDatabase()
+                Handler().postDelayed({ onDataSyncWithDatabase() }, 5000)
             }
         }
     }

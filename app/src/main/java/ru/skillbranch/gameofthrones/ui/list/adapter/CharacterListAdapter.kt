@@ -18,7 +18,7 @@ class CharacterListAdapter(val listener: (CharacterItem) -> Unit) :
         CharacterItemDiffCallback()
     ) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterItemViewHolder{
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterItemViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return CharacterItemViewHolder(
             inflater.inflate(
@@ -45,8 +45,10 @@ class CharacterListAdapter(val listener: (CharacterItem) -> Unit) :
             Glide.with(itemView)
                 .load(getDrawableHouseIcon(item.house))
                 .into(itemView.iv_house)
-            itemView.tv_character_name.text = item.name
-            itemView.tv_character_titles.text = item.titles.joinToString { " • " }
+            itemView.tv_character_name.text = item.name.ifEmpty { "Information is unknown" }
+            itemView.tv_character_titles.text =
+                item.titles.filter { it.isNotEmpty() }.joinToString(" • ")
+                    .ifEmpty { "Information is unknown" }
         }
 
     }

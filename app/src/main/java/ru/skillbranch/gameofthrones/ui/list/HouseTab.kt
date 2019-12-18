@@ -1,19 +1,18 @@
 package ru.skillbranch.gameofthrones.ui.list
 
 import android.content.Context
-import androidx.core.content.ContextCompat
 import ru.skillbranch.gameofthrones.R
 import ru.skillbranch.gameofthrones.ui.list.adapter.*
 
-fun getHouseTabColor(context: Context, position: Int): Int {
+fun getHouseTabColor(position: Int): Int {
     return when (position) {
-        HOUSE_STARK_PAGE_INDEX -> ContextCompat.getColor(context, R.color.stark_primary)
-        HOUSE_LANNISTER_PAGE_INDEX -> ContextCompat.getColor(context, R.color.lannister_primary)
-        HOUSE_TARGARYEN_PAGE_INDEX -> ContextCompat.getColor(context, R.color.targaryen_primary)
-        HOUSE_BARATHEON_PAGE_INDEX -> ContextCompat.getColor(context, R.color.baratheon_primary)
-        HOUSE_GREYJOY_PAGE_INDEX -> ContextCompat.getColor(context, R.color.greyjoy_primary)
-        HOUSE_MARTELL_PAGE_INDEX -> ContextCompat.getColor(context, R.color.martel_primary)
-        HOUSE_TYRELL_PAGE_INDEX -> ContextCompat.getColor(context, R.color.tyrel_primary)
+        HOUSE_STARK_PAGE_INDEX -> R.color.stark_primary
+        HOUSE_LANNISTER_PAGE_INDEX -> R.color.lannister_primary
+        HOUSE_TARGARYEN_PAGE_INDEX -> R.color.targaryen_primary
+        HOUSE_BARATHEON_PAGE_INDEX -> R.color.baratheon_primary
+        HOUSE_GREYJOY_PAGE_INDEX -> R.color.greyjoy_primary
+        HOUSE_MARTELL_PAGE_INDEX -> R.color.martel_primary
+        HOUSE_TYRELL_PAGE_INDEX -> R.color.tyrel_primary
         else -> throw IndexOutOfBoundsException()
     }
 }
