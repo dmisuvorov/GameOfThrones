@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
@@ -15,31 +17,53 @@
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="6dp"
-            android:minHeight="?attr/actionBarSize">
+            android:layout_height="match_parent">
 
-            <TextView
+            <View
+                android:id="@+id/reveal_view"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:gravity="center_vertical"
-                android:text="@string/app_name"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline5.GameOfThrones"
-                android:textColor="@android:color/white" />
+                android:layout_height="match_parent"
+                android:visibility="invisible"
+                tools:visibility="visible" />
 
-        </androidx.appcompat.widget.Toolbar>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:tabMode="scrollable" />
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="6dp"
+                    android:minHeight="?attr/actionBarSize">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:gravity="center_vertical"
+                        android:text="@string/app_name"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Headline5.GameOfThrones"
+                        android:textColor="@android:color/white" />
+
+                </androidx.appcompat.widget.Toolbar>
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_below="@id/toolbar"
+                    app:tabMode="scrollable" />
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
 
     </com.google.android.material.appbar.AppBarLayout>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

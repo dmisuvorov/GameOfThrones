@@ -88,8 +88,6 @@ class CharacterListFragment : Fragment() {
 
     private fun searchCharacter(searchView: SearchView) {
         searchView.apply {
-            (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            (activity as AppCompatActivity).supportActionBar?.setDisplayShowHomeEnabled(true)
             queryHint = getString(R.string.hint_search)
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
