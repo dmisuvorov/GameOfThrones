@@ -2,11 +2,9 @@ package ru.skillbranch.gameofthrones
 
 import android.app.Application
 import android.content.Context
-import ru.skillbranch.gameofthrones.di.ApplicationComponent
-import ru.skillbranch.gameofthrones.di.DaggerApplicationComponent
-import ru.skillbranch.gameofthrones.di.ListSubComponent
-import ru.skillbranch.gameofthrones.di.SplashSubComponent
+import ru.skillbranch.gameofthrones.di.*
 import ru.skillbranch.gameofthrones.di.modules.AndroidModule
+import ru.skillbranch.gameofthrones.di.modules.CharacterModule
 import ru.skillbranch.gameofthrones.di.modules.ListModule
 import ru.skillbranch.gameofthrones.di.modules.SplashModule
 
@@ -41,6 +39,12 @@ class App : Application() {
                 return field
             }
 
+        var characterSubComponent: CharacterSubComponent? = null
+            get() {
+                field ?: return component.plus(CharacterModule())
+                return field
+            }
+
 
         fun releaseSplashSubComponent() {
             splashSubComponent = null
@@ -48,6 +52,10 @@ class App : Application() {
 
         fun releaseListSubComponent() {
             listSubComponent = null
+        }
+
+        fun releaseCharacterSubComponent() {
+            characterSubComponent = null
         }
 
         fun get(context: Context): App = context.applicationContext as App

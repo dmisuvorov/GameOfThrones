@@ -16,6 +16,8 @@ import kotlinx.android.synthetic.main.activity_character_list.*
 import ru.skillbranch.gameofthrones.App
 import ru.skillbranch.gameofthrones.R
 import ru.skillbranch.gameofthrones.ui.list.adapter.*
+import ru.skillbranch.gameofthrones.util.getHouseTabColor
+import ru.skillbranch.gameofthrones.util.getHouseTabTitle
 import javax.inject.Inject
 import kotlin.math.hypot
 import kotlin.math.max
@@ -94,12 +96,14 @@ class CharacterListScreen : AppCompatActivity() {
         }
     }
 
-    private fun getTabColor(position: Int): Int = getHouseTabColor(position)
+    private fun getTabColor(position: Int): Int =
+        getHouseTabColor(position)
 
-    private fun getTabTitle(position: Int): String? = getHouseTabTitle(context, position)
+    private fun getTabTitle(position: Int): String? =
+        getHouseTabTitle(context, position)
 
     private fun releaseSubComponent() {
-        App.releaseSplashSubComponent()
+        App.releaseListSubComponent()
     }
 
     companion object {

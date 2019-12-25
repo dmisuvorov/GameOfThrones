@@ -5,7 +5,6 @@ import android.graphics.drawable.InsetDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -14,7 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_character_list.*
 import ru.skillbranch.gameofthrones.App
 import ru.skillbranch.gameofthrones.R
+import ru.skillbranch.gameofthrones.data.local.entities.CharacterItem
 import ru.skillbranch.gameofthrones.presentation.list.ListViewModel
+import ru.skillbranch.gameofthrones.ui.character.CharacterScreen
 import ru.skillbranch.gameofthrones.ui.list.adapter.CharacterListAdapter
 import ru.skillbranch.gameofthrones.util.convertDpToPx
 import javax.inject.Inject
@@ -28,7 +29,7 @@ class CharacterListFragment : Fragment() {
     @Inject
     lateinit var applicationContext: Context
 
-    private val recyclerAdapter = CharacterListAdapter({})
+    private val recyclerAdapter = CharacterListAdapter { characterItem -> navigateToCharacterDetails(characterItem) }
     private var houseArgument: String? = null
     private var flag: Boolean =
         false //TODO: костыль onCreateOptionsMenu вызывается при свайпе страниц несколько раз что влечет несколько actionItem
@@ -131,6 +132,10 @@ class CharacterListFragment : Fragment() {
 
     private fun injectDependencies() {
         App.listSubComponent?.inject(this)
+    }
+
+    private fun navigateToCharacterDetails(characterItem: CharacterItem) {
+        startActivity(CharacterScreen.newIntent(applicationContext, characterItem.id))
     }
 
     companion object {

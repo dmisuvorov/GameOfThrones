@@ -10,4 +10,5 @@
     <string name="greyjoy_title">Greyjoy</string>
     <string name="martel_title">Martell</string>
     <string name="tyrell_title">Tyrell</string>
+    <string name="header_words">Words</string>
 </resources>

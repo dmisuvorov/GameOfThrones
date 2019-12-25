@@ -15,6 +15,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.splash.SplashScreen"
+            android:screenOrientation="portrait"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.list.CharacterListScreen"/>
+        <activity android:name=".ui.character.CharacterScreen"/>
     </application>
 
 </manifest>

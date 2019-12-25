@@ -17,7 +17,7 @@ interface CharacterDao {
     @Query("SELECT characters.id id, characters.name name, houses.words words, characters.born born, " +
             "characters.died died, characters.titles titles, characters.aliases aliases, characters.houseId house, " +
             "characters.father father, characters.mother mother " +
-            "FROM characters, houses WHERE characters.id = :id")
+            "FROM characters, houses WHERE characters.id = :id AND houses.id = characters.houseId")
     fun findCharacterFullById(id: String): Maybe<CharacterFull>
 
     @Query("SELECT id, name, houseId as house FROM characters WHERE id = :id")

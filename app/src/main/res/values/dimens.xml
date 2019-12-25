@@ -5,4 +5,10 @@
     <dimen name="toolbar_horizontal_padding">4dp</dimen>
     <dimen name="first_key_line">24dp</dimen>
     <dimen name="second_key_line">80dp</dimen>
+    <dimen name="toolbar_elevation">6dp</dimen>
+    <dimen name="padding_bottom_nested_scroll">72dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_normal">16dp</dimen>
+
+    <dimen name="decor_iv_size">48dp</dimen>
 </resources>

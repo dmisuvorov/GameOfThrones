@@ -17,7 +17,6 @@ import ru.skillbranch.gameofthrones.data.local.GameOfThronesDatabase
 import ru.skillbranch.gameofthrones.data.local.HouseDao
 import ru.skillbranch.gameofthrones.data.local.entities.CharacterFull
 import ru.skillbranch.gameofthrones.data.local.entities.CharacterItem
-import ru.skillbranch.gameofthrones.data.local.entities.newInstance
 import ru.skillbranch.gameofthrones.data.remote.HouseApi
 import ru.skillbranch.gameofthrones.data.remote.res.CharacterRes
 import ru.skillbranch.gameofthrones.data.remote.res.HouseRes
@@ -229,7 +228,7 @@ object RootRepository {
                         if (characterFull.father!!.id.isNotEmpty())
                             characterDao?.findRelativeCharacterById(characterFull.father.id)!!
                                 .flatMap { fatherRelative ->
-                                    Maybe.just(characterFull.newInstance(father = fatherRelative))
+                                    Maybe.just(characterFull.copy(father = fatherRelative))
                                 }
                         else Maybe.just(characterFull)
                     }
@@ -242,7 +241,7 @@ object RootRepository {
                         if (characterFull.mother!!.id.isNotEmpty())
                             characterDao?.findRelativeCharacterById(characterFull.mother.id)!!
                                 .flatMap { motherRelative ->
-                                    Maybe.just(characterFull.newInstance(mother = motherRelative))
+                                    Maybe.just(characterFull.copy(mother = motherRelative))
                                 }
                         else Maybe.just(characterFull)
                     }

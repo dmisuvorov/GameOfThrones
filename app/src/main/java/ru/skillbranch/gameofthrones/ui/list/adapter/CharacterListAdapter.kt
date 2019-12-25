@@ -11,7 +11,7 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.list_item_character.view.*
 import ru.skillbranch.gameofthrones.R
 import ru.skillbranch.gameofthrones.data.local.entities.CharacterItem
-import ru.skillbranch.gameofthrones.ui.list.getDrawableHouseIcon
+import ru.skillbranch.gameofthrones.util.getDrawableHouseIcon
 
 class CharacterListAdapter(val listener: (CharacterItem) -> Unit) :
     ListAdapter<CharacterItem, CharacterListAdapter.CharacterItemViewHolder>(
@@ -49,6 +49,7 @@ class CharacterListAdapter(val listener: (CharacterItem) -> Unit) :
             itemView.tv_character_titles.text =
                 item.titles.filter { it.isNotEmpty() }.joinToString(" • ")
                     .ifEmpty { "Information is unknown" }
+            itemView.setOnClickListener { listener.invoke(item) }
         }
 
     }
