@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/iv_house"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="@dimen/iv_icon_size"
+        android:layout_height="@dimen/iv_icon_size"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
@@ -21,11 +21,12 @@
         android:id="@+id/tv_character_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="4dp"
-        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
         android:layout_toEndOf="@id/iv_house"
+        android:maxLines="1"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         tools:text="Arya Stark" />
@@ -36,11 +37,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_character_name"
         android:layout_alignBaseline="@id/iv_house"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
         android:layout_toEndOf="@id/iv_house"
         android:ellipsize="end"
         android:maxLines="2"
-        tools:text="Arya Stark - Princess • Arya Horseface • Arya Underfoot • Arry • Lumpyface • Lumpyhead • Stickboy • Weasel • Nymeria • Squan • Saltb • Cat of the Canaly • Bets • The Blind Girh • The Ugly Little Girl • Mercedenl • Mercye" />
+        tools:text="Princess • Arya Horseface • Arya Underfoot • Arry • Lumpyface • Lumpyhead • Stickboy • Weasel • Nymeria • Squan • Saltb • Cat of the Canaly • Bets • The Blind Girh • The Ugly Little Girl • Mercedenl • Mercye" />
 
 </RelativeLayout>

@@ -17,6 +17,7 @@ import ru.skillbranch.gameofthrones.data.local.GameOfThronesDatabase
 import ru.skillbranch.gameofthrones.data.local.HouseDao
 import ru.skillbranch.gameofthrones.data.local.entities.CharacterFull
 import ru.skillbranch.gameofthrones.data.local.entities.CharacterItem
+import ru.skillbranch.gameofthrones.data.local.entities.RelativeCharacter
 import ru.skillbranch.gameofthrones.data.remote.HouseApi
 import ru.skillbranch.gameofthrones.data.remote.res.CharacterRes
 import ru.skillbranch.gameofthrones.data.remote.res.HouseRes
@@ -227,10 +228,12 @@ object RootRepository {
                         characterFull.father ?: Maybe.just(characterFull)
                         if (characterFull.father!!.id.isNotEmpty())
                             characterDao?.findRelativeCharacterById(characterFull.father.id)!!
+                                .doOnComplete { Maybe.just(characterFull.copy(father = null)) }
                                 .flatMap { fatherRelative ->
                                     Maybe.just(characterFull.copy(father = fatherRelative))
                                 }
-                        else Maybe.just(characterFull)
+                        else
+                            Maybe.just(characterFull)
                     }
 
             }
@@ -240,9 +243,11 @@ object RootRepository {
                         characterFull.mother ?: Maybe.just(characterFull)
                         if (characterFull.mother!!.id.isNotEmpty())
                             characterDao?.findRelativeCharacterById(characterFull.mother.id)!!
+                                .onErrorReturnItem(characterFull.mother.copy(id = "", name = "", house = ""))
                                 .flatMap { motherRelative ->
                                     Maybe.just(characterFull.copy(mother = motherRelative))
                                 }
+                                .doOnComplete { Maybe.just(characterFull.copy(mother = null)) }
                         else Maybe.just(characterFull)
                     }
             }

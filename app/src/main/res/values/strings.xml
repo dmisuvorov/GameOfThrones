@@ -12,4 +12,9 @@
     <string name="tyrell_title">Tyrell</string>
 
     <string name="header_words">Words:</string>
+    <string name="header_born">Born:</string>
+    <string name="header_titles">Titles:</string>
+    <string name="header_aliases">Aliases:</string>
+    <string name="header_father">Father:</string>
+    <string name="header_mother">Mother:</string>
 </resources>

@@ -115,7 +115,7 @@ class CharacterListFragment : Fragment() {
     private fun initViews() {
         val customDivider = InsetDrawable(
             applicationContext.resources.getDrawable(R.drawable.divider, activity?.theme),
-            convertDpToPx(84, applicationContext),
+            convertDpToPx(72, applicationContext),
             0,
             0,
             0

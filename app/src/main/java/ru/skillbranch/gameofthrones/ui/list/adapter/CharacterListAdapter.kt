@@ -13,7 +13,7 @@ import ru.skillbranch.gameofthrones.R
 import ru.skillbranch.gameofthrones.data.local.entities.CharacterItem
 import ru.skillbranch.gameofthrones.util.getDrawableHouseIcon
 
-class CharacterListAdapter(val listener: (CharacterItem) -> Unit) :
+class CharacterListAdapter(private val listener: (CharacterItem) -> Unit) :
     ListAdapter<CharacterItem, CharacterListAdapter.CharacterItemViewHolder>(
         CharacterItemDiffCallback()
     ) {

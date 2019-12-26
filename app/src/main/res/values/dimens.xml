@@ -9,6 +9,8 @@
     <dimen name="padding_bottom_nested_scroll">72dp</dimen>
     <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_normal">16dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_normal">16dp</dimen>
 
-    <dimen name="decor_iv_size">36dp</dimen>
+    <dimen name="iv_icon_size">40dp</dimen>
 </resources>

@@ -128,3 +128,29 @@ fun getColorPrimaryHouse(house: String): Int? {
         else -> null
     }
 }
+
+fun getColorAccentHouse(house: String): Int? {
+    return when(house) {
+        "Stark" -> R.color.stark_accent
+        "Lannister" -> R.color.lannister_accent
+        "Targaryen" -> R.color.targaryen_accent
+        "Baratheon" -> R.color.baratheon_accent
+        "Greyjoy" -> R.color.greyjoy_accent
+        "Martell" -> R.color.martel_accent
+        "Tyrell" -> R.color.tyrel_accent
+        else -> null
+    }
+}
+
+fun getColorDarkHouse(house: String): Int? {
+    return when(house) {
+        "Stark" -> R.color.stark_dark
+        "Lannister" -> R.color.lannister_dark
+        "Targaryen" -> R.color.targaryen_dark
+        "Baratheon" -> R.color.baratheon_dark
+        "Greyjoy" -> R.color.greyjoy_dark
+        "Martell" -> R.color.martel_dark
+        "Tyrell" -> R.color.tyrel_dark
+        else -> null
+    }
+}
