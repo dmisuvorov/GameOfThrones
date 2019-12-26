@@ -10,5 +10,5 @@
     <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_normal">16dp</dimen>
 
-    <dimen name="decor_iv_size">48dp</dimen>
+    <dimen name="decor_iv_size">36dp</dimen>
 </resources>

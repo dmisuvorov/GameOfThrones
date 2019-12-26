@@ -32,9 +32,12 @@ class CharacterScreen : AppCompatActivity() {
             return
         }
         savedInstanceState ?: initViewModel(intent.extras!!.getString(ARG_CHARACTER_ID)!!)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(toolbar_character_details)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
+        toolbar_character_details.setNavigationOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun initViewModel(characterId: String) {
@@ -46,6 +49,7 @@ class CharacterScreen : AppCompatActivity() {
         toolbar_layout_character_details.setContentScrimResource(getColorPrimaryHouse(characterFull.house)!!)
         Glide.with(this)
             .load(getDrawableHouseCoastOfArms(characterFull.house))
+            .fitCenter()
             .into(iv_coast_of_arms_character_details)
         toolbar_layout_character_details.title = characterFull.name
         tv_words.text = characterFull.words

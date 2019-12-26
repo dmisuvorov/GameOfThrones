@@ -40,15 +40,21 @@ class CharacterListAdapter(val listener: (CharacterItem) -> Unit) :
 
         override val containerView: View?
             get() = itemView
+        private var titles: String = ""
+        private var aliases: String = ""
 
         fun bind(item: CharacterItem, listener: (CharacterItem) -> Unit) {
             Glide.with(itemView)
                 .load(getDrawableHouseIcon(item.house))
                 .into(itemView.iv_house)
             itemView.tv_character_name.text = item.name.ifEmpty { "Information is unknown" }
+
+            titles = item.titles.filter { it.isNotEmpty() }.joinToString(" • ")
+            aliases = item.aliases.filter { it.isNotEmpty() }.joinToString(" • ")
+            if (titles.isNotEmpty() && aliases.isNotEmpty()) titles = titles.plus(" • ")
             itemView.tv_character_titles.text =
-                item.titles.filter { it.isNotEmpty() }.joinToString(" • ")
-                    .ifEmpty { "Information is unknown" }
+                titles.plus(aliases).ifEmpty { "Information is unknown" }
+
             itemView.setOnClickListener { listener.invoke(item) }
         }
 
