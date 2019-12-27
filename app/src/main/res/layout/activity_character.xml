@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/coordinator_character_details"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator_character_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_gray_light"
-    android:fitsSystemWindows="true"
     tools:context=".ui.character.CharacterScreen">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_character_details"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_gray_light"
         android:fitsSystemWindows="true"
         android:stateListAnimator="@animator/show_toolbar"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -23,14 +20,11 @@
             android:id="@+id/toolbar_layout_character_details"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
             app:collapsedTitleGravity="start"
             app:collapsedTitleTextAppearance="@style/TextAppearance.AppCompat.Headline5.GameOfThrones"
-            app:contentScrim="@color/color_primary_dark"
             app:expandedTitleGravity="bottom|center_horizontal"
-            app:expandedTitleMarginBottom="64dp"
+            app:expandedTitleMarginBottom="90dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:statusBarScrim="@color/color_primary_dark"
             app:titleEnabled="true"
             app:toolbarId="@id/toolbar_character_details">
 
@@ -46,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@android:color/transparent"
-                android:fitsSystemWindows="false"
+
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
                 app:titleTextColor="@android:color/white" />
@@ -212,9 +206,10 @@
                 android:id="@+id/btn_father"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="?attr/colorPrimary"
+                android:elevation="@dimen/toolbar_elevation"
+                android:padding="@dimen/padding_small"
                 android:textColor="@android:color/white"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@id/tv_header_father"
                 app:layout_constraintTop_toBottomOf="@id/tv_aliases" />
 
@@ -260,9 +255,10 @@
                 android:id="@+id/btn_mother"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="?attr/colorPrimary"
+                android:elevation="@dimen/toolbar_elevation"
+                android:padding="@dimen/padding_small"
                 android:textColor="@android:color/white"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@id/tv_header_mother"
                 app:layout_constraintTop_toBottomOf="@id/barrier" />
 

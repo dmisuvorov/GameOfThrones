@@ -2,6 +2,7 @@ package ru.skillbranch.gameofthrones.ui.character
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -60,6 +61,7 @@ class CharacterScreen : AppCompatActivity() {
             setContentScrimResource(scrim)
             setStatusBarScrimColor(darkScrim!!)
         }
+
         Glide.with(this)
             .load(getDrawableHouseCoastOfArms(characterFull.house))
             .fitCenter()
@@ -78,14 +80,14 @@ class CharacterScreen : AppCompatActivity() {
         characterFull.father?.takeIf { it.id.isNotEmpty() }?.let { rel ->
             group_father.visibility = View.VISIBLE
             btn_father.text = rel.name
-            btn_father.setBackgroundColor(scrim!!)
+            btn_father.background  = ColorDrawable(getColor(scrim!!))
             btn_father.setOnClickListener { startActivity(newIntent(appContext, rel.id)) }
         }
 
         characterFull.mother?.takeIf { it.id.isNotEmpty() }?.let { rel ->
             group_mother.visibility = View.VISIBLE
             btn_mother.text = rel.name
-            btn_mother.setBackgroundColor(scrim!!)
+            btn_mother.background  = ColorDrawable(getColor(scrim!!))
             btn_mother.setOnClickListener { startActivity(newIntent(appContext, rel.id)) }
         }
 

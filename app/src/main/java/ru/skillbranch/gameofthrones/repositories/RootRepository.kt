@@ -17,13 +17,13 @@ import ru.skillbranch.gameofthrones.data.local.GameOfThronesDatabase
 import ru.skillbranch.gameofthrones.data.local.HouseDao
 import ru.skillbranch.gameofthrones.data.local.entities.CharacterFull
 import ru.skillbranch.gameofthrones.data.local.entities.CharacterItem
-import ru.skillbranch.gameofthrones.data.local.entities.RelativeCharacter
 import ru.skillbranch.gameofthrones.data.remote.HouseApi
 import ru.skillbranch.gameofthrones.data.remote.res.CharacterRes
 import ru.skillbranch.gameofthrones.data.remote.res.HouseRes
 import ru.skillbranch.gameofthrones.data.remote.res.shortName
 import ru.skillbranch.gameofthrones.data.toCharacter
 import ru.skillbranch.gameofthrones.data.toHouse
+import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 object RootRepository {
@@ -228,6 +228,8 @@ object RootRepository {
                         characterFull.father ?: Maybe.just(characterFull)
                         if (characterFull.father!!.id.isNotEmpty())
                             characterDao?.findRelativeCharacterById(characterFull.father.id)!!
+                                .onErrorReturnItem(characterFull.father.copy(id = ""))
+                                .toMaybe()
                                 .flatMap { fatherRelative ->
                                     Maybe.just(characterFull.copy(father = fatherRelative))
                                 }
@@ -243,7 +245,8 @@ object RootRepository {
                         characterFull.mother ?: Maybe.just(characterFull)
                         if (characterFull.mother!!.id.isNotEmpty())
                             characterDao?.findRelativeCharacterById(characterFull.mother.id)!!
-                                .onErrorReturnItem(characterFull.mother.copy(id = "", name = "", house = ""))
+                                .onErrorReturnItem(characterFull.mother.copy(id = ""))
+                                .toMaybe()
                                 .flatMap { motherRelative ->
                                     Maybe.just(characterFull.copy(mother = motherRelative))
                                 }
@@ -256,7 +259,7 @@ object RootRepository {
             .subscribe(
                 { characters -> result(characters) },
                 { error -> error.printStackTrace() },
-                {  })
+                { throw IllegalArgumentException("No such character") })
     }
 
     /**

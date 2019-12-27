@@ -1,7 +1,11 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
 
     <style name="TextAppearance.AppCompat.Headline5.GameOfThrones" parent="TextAppearance.AppCompat.Headline">
         <item name="fontFamily">sans-serif</item>

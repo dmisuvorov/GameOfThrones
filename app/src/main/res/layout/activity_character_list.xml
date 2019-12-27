@@ -16,6 +16,7 @@
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <FrameLayout
@@ -36,14 +37,15 @@
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:elevation="@dimen/toolbar_elevation"
-                    android:minHeight="?attr/actionBarSize">
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_marginTop="24dp"
+                    android:elevation="@dimen/toolbar_elevation">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
                         android:gravity="center_vertical"
+
                         android:text="@string/app_name"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline5.GameOfThrones"
                         android:textColor="@android:color/white" />

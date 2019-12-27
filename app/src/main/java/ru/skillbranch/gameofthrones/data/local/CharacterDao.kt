@@ -21,7 +21,7 @@ interface CharacterDao {
     fun findCharacterFullById(id: String): Maybe<CharacterFull>
 
     @Query("SELECT id, name, houseId as house FROM characters WHERE id = :id")
-    fun findRelativeCharacterById(id: String): Maybe<RelativeCharacter>
+    fun findRelativeCharacterById(id: String): Single<RelativeCharacter>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCharacters(character: List<Character>)
