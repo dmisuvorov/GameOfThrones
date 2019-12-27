@@ -228,13 +228,13 @@ object RootRepository {
                         characterFull.father ?: Maybe.just(characterFull)
                         if (characterFull.father!!.id.isNotEmpty())
                             characterDao?.findRelativeCharacterById(characterFull.father.id)!!
-                                .doOnComplete { Maybe.just(characterFull.copy(father = null)) }
                                 .flatMap { fatherRelative ->
                                     Maybe.just(characterFull.copy(father = fatherRelative))
                                 }
                         else
                             Maybe.just(characterFull)
                     }
+
 
             }
             .flatMap { characterFull ->
@@ -256,7 +256,7 @@ object RootRepository {
             .subscribe(
                 { characters -> result(characters) },
                 { error -> error.printStackTrace() },
-                { throw IllegalArgumentException("No such character") })
+                {  })
     }
 
     /**
